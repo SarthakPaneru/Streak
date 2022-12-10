@@ -2,12 +2,12 @@ import java.util.Random;
 
 public class Card {
 
-    private final int rank;
-    private final int suit;
+    private int rank;
+    private int suit;
 
     private static final String [] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
     private Suits SUITS;
-    private static final Random GENERATOR = new Random();
+    private Random GENERATOR = new Random();
 
     public Card() {
         // Generate values for ranks and suits in our construction
@@ -25,6 +25,10 @@ public class Card {
         return rank;
     }
 
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public int getRankPosition(Card card) {
         int position = 0;
         String str = card.toString();
@@ -39,28 +43,16 @@ public class Card {
         return position;
     }
 
-    public int getSuit() {
-        return suit;
+    public int getSuit(Card card) {
+        return card.suit;
+    }
+
+    public void setSuit(int suit) {
+        this.suit = suit;
     }
 
 
-//    `public Card[] insertionSort(Card [] cards) {
-//        int n = cards.length;
-//
-//        Card check = new Card();
-//
-//        for (int i=2; i<n; i++) {
-//            Card card = cards[i];
-//            int j = i-1;
-//
-//            while (j>0 && check.getRankPosition(cards[i]) > check.getRankPosition(card)) {
-//                cards[j+1] = cards[j];
-//                j = j-1;
-//            }
-//            cards[j+1] = card;
-//        }
-//        return cards;
-//    }`
+
 
 
     @Override

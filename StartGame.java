@@ -47,7 +47,7 @@ public class StartGame {
 
                     LinkedList [] storeList = new LinkedList[noOfCards];
 
-                    LinkedList list = new LinkedList();
+                    LinkedList [] list = new LinkedList[noOfCards];
 
                     Card [] tempArr = new Card[noOfCards];
                     Card [] tempArr1 = new Card[noOfCards];
@@ -55,7 +55,7 @@ public class StartGame {
                     deck.shuffle();
                     for(int i=0; i<noOfCards; i++) {
 
-//                        list[i] = new LinkedList();
+                        list[i] = new LinkedList();
 
 
 
@@ -70,8 +70,8 @@ public class StartGame {
                             }
                         } else {
                             for (int j = 0; j < noOfCards; j++) {
-                                tempArr[j] = list.getNode(j+1).card;
-                                System.out.println(tempArr[j]);
+                                tempArr[j] = list[i-1].getNode(j+1).card;
+//                                System.out.println(tempArr[j]);
                             }
                         }
 
@@ -83,23 +83,27 @@ public class StartGame {
 
                         tempArr1 = sort.insertionSort(tempArr);
 
-                        if (i==0) {
-                            for (int j = 0; j < noOfCards; j++) {
+                        for (int j = 0; j < noOfCards; j++) {
 //                            System.out.println(tempArr1[j].toString());
-                                list.add(tempArr1[j], j);
+                            LinkedList temp = new LinkedList();
+                            list[i].add(tempArr1[j], j);
 //                            index++; // We are increasing the index of cards in deck
 //                            System.out.println(list1.getNode(index).card);
-                            }
                         }
 
                         for (int j=0; j<noOfCards; j++) {
-                            System.out.println(Letter.values()[j] + ": " + list.getNode(j+1).card);
+                            System.out.println(Letter.values()[j] + ": " + list[i].getNode(j+1).card);
                         }
 
-//                        list[i].insertionSort(list[i]);
+                        player.calculateScore(list[i]);
+
+                        System.out.println("Max streak value is " + player.getScore());
+                        System.out.println();
+
+//                        list[i][i].insertionSort(list[i][i]);
 
 //                        for (int j=0; j<noOfCards; j++) {
-//                            System.out.println(Letter.values()[j] + ": " + list[i].getNode(j+1).card);
+//                            System.out.println(Letter.values()[j] + ": " + list[i][i].getNode(j+1).card);
 //                        }
 
 
@@ -126,27 +130,28 @@ public class StartGame {
 //                            System.out.println(noOfCards);
                             Letter [] letters = Letter.values();
                             if (decision.equals(letters[j].toString())) {
-                                list.deleteNode(j+2);   // idk j+2 only seems to delete our node correctly
-                                list.add(deck.getCardInDeck(index), j);
-                                System.out.println(list.lengthOfNode(list.getHead()));
+                                list[i].deleteNode(j+2);   // IDK j+2 only seems to delete our node correctly
+                                list[i].add(deck.getCardInDeck(index), j);
                                 index++;
-//                                list[i].swapCard(deck.getCardInDeck(index++), j);
+//                                list[i][i].swapCard(deck.getCardInDeck(index++), j);
 
                             } else {
                                 counter2++;
                             }
-//                            tempArr[j] = list.getNode(j+1).card;
+                            // It is implemented above
+//                            tempArr[j] = list[i].getNode(j+1).card;
 //                            System.out.println(j);
 //                            System.out.println(tempArr[j]);
                         }
+
                         if (counter2 == noOfCards) {
                             System.out.println("Wrong input");
                             i--;
                             continue;
                         }
-                        for (int j=0; j<noOfCards; j++) {
-                            System.out.println(Letter.values()[j] + ": " + list.getNode(j+1).card);
-                        }
+//                        for (int j=0; j<noOfCards; j++) {
+//                            System.out.println(Letter.values()[j] + ": " + list[i].getNode(j+1).card);
+//                        }
                         System.out.println("\n");
 
                     }
@@ -169,22 +174,4 @@ public class StartGame {
             }
         }
     }
-
-//    public Card[] insertionSort(Card[] cards) {
-//        int n = cards.length;
-//
-//        Card check = new Card();
-//
-//        for (int i=2; i<n; i++) {
-//            Card card = cards[i];
-//            int j = i-1;
-//
-//            while (j>0 && check.getRankPosition(cards[i]) > check.getRankPosition(card)) {
-//                cards[j+1] = cards[j];
-//                j = j-1;
-//            }
-//            cards[j+1] = card;
-//        }
-//        return cards;
-//    }
 }
