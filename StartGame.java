@@ -45,12 +45,15 @@ public class StartGame {
                     // gives position of shuffle deck of cards
                     int index = 0;
 
-                    LinkedList [] storeList = new LinkedList[noOfCards];
+                    LinkedList initialList = new LinkedList();
 
                     LinkedList [] list = new LinkedList[noOfCards];
 
                     Card [] tempArr = new Card[noOfCards];
                     Card [] tempArr1 = new Card[noOfCards];
+
+                    String decision;
+                    String [] replacedCard = new String[noOfCards];
 
                     deck.shuffle();
                     for(int i=0; i<noOfCards; i++) {
@@ -66,6 +69,7 @@ public class StartGame {
                         if (i == 0) {
                             for (int j = 0; j < noOfCards; j++) {
                                 tempArr[j] = deck.getCardInDeck(index);
+//                                list[j].add(tempArr[j], j);
                                 index++;
                             }
                         } else {
@@ -87,6 +91,9 @@ public class StartGame {
 //                            System.out.println(tempArr1[j].toString());
                             LinkedList temp = new LinkedList();
                             list[i].add(tempArr1[j], j);
+                            if (i == 0) {
+                                initialList.add(tempArr1[j], j);
+                            }
 //                            index++; // We are increasing the index of cards in deck
 //                            System.out.println(list1.getNode(index).card);
                         }
@@ -118,7 +125,7 @@ public class StartGame {
 //                        }
 
                         System.out.println(i+1 + " of " + noOfCards + ": Choose card to change or X to exit: ");
-                        String decision = s.nextLine();
+                        decision = s.nextLine();
 
                         if (decision.equals("X") || decision.equals("x")) {
                             i = noOfCards;
@@ -130,6 +137,10 @@ public class StartGame {
 //                            System.out.println(noOfCards);
                             Letter [] letters = Letter.values();
                             if (decision.equals(letters[j].toString())) {
+//                                if (i==0) {
+//                                    replacedCard[i] = initialList.getNode(j + 1).card.toString();
+//                                }
+                                replacedCard[i] = list[i].getNode(j + 1).card.toString();
                                 list[i].deleteNode(j+2);   // IDK j+2 only seems to delete our node correctly
                                 list[i].add(deck.getCardInDeck(index), j);
                                 index++;
@@ -142,18 +153,55 @@ public class StartGame {
 //                            tempArr[j] = list[i].getNode(j+1).card;
 //                            System.out.println(j);
 //                            System.out.println(tempArr[j]);
+
+//                            list[i].getNode(1);
+
                         }
+
 
                         if (counter2 == noOfCards) {
                             System.out.println("Wrong input");
                             i--;
                             continue;
                         }
+
 //                        for (int j=0; j<noOfCards; j++) {
-//                            System.out.println(Letter.values()[j] + ": " + list[i].getNode(j+1).card);
+//                            System.out.println(Letter.values()[j] + ": " + list[i+1].getNode(j+1).card);
 //                        }
                         System.out.println("\n");
 
+                    }
+                    System.out.println("*******************");
+                    System.out.println("Streak value is: " + player.getScore());
+                    System.out.println("*******************");
+                    System.out.println();
+                    System.out.println();
+                    System.out.println("See replay? (y/n) ");
+                    String replay = s.nextLine();
+
+                    if (replay.equals("y") || replay.equals("Y")) {
+                        System.out.println();
+                        System.out.println("REPLAY");
+                        System.out.println("------");
+                        for (int i=0; i<index-noOfCards+1; i++) {
+//                            System.out.println(list[i+1].getNodeStr(1));
+                            System.out.println();
+                            System.out.println(player.getName());
+                            if (i==0) {
+                                System.out.println("Initial list");
+                                for (int j=0; j<noOfCards; j++) {
+                                    System.out.println(Letter.values()[j] + ": " + initialList.getNode(j+1).card);
+                                }
+//                                System.out.println("Selection was " + replacedCard[i]);
+//                                s.nextLine();
+                            } else {
+                                for (int j = 0; j < noOfCards; j++) {
+                                    System.out.println(Letter.values()[j] + ": " + list[i-1].getNode(j + 1).card);
+                                }
+                            }
+                            System.out.println("Selection was " + replacedCard[i]);
+                            s.nextLine();
+                        }
                     }
                     break;
 

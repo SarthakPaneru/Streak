@@ -67,12 +67,12 @@ public class Player {
 //            System.out.println("Before streak value: " + streak);
 //            System.out.println("IS head.next null? " + head.next);    OK
             if(head.next != null) {
-                System.out.println("Rank sub: " + rank[i+1] + " -  " + rank[i] + " = "+ (rank[i + 1] - rank[i]));
+//                System.out.println("Rank sub: " + rank[i+1] + " -  " + rank[i] + " = "+ (rank[i + 1] - rank[i]));
                 if ((rank[i + 1] - rank[i]) == 1) {
 //                    score++;
                     streak++;
                     score = streak;
-                    System.out.println(score);
+//                    System.out.println(score);
 
                     // Lets try something new
                     if (suit[i]%2 == suit[i+1]%2) {
@@ -106,12 +106,12 @@ public class Player {
         if (score < streak) {
             score = streak;
         }
-        System.out.println("Position = " + position);
-        System.out.println("Streak: " + streak);
-        System.out.println("Score: " + score);
+//        System.out.println("Position = " + position);
+//        System.out.println("Streak: " + streak);
+//        System.out.println("Score: " + score);
 
         // If same color
-        if ((temp3==score)) {
+        if ((temp3==score && score != 1)) {
             // If same SUIT
             if (temp4==score) {
                 score++;

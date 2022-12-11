@@ -130,6 +130,25 @@ public class LinkedList {
         return len;
     }
 
+    public LinkedList copy(LinkedList list) {
+
+        LinkedList linkedList = new LinkedList();
+
+        if (list == null) {
+            return null;
+        }
+
+        linkedList.size = list.size;
+
+        while(list.node.next != null) {
+            linkedList.node.card = list.node.card;
+            linkedList.node.next = list.node.next;
+            list.node.next = list.node.next.next;
+        }
+
+        return linkedList;
+    }
+
 //    public void insertionSort(LinkedList list) {
 //        Node temp = new Node();
 ////        LinkedList temp = new LinkedList();
