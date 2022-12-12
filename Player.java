@@ -17,7 +17,7 @@ public class Player {
     }
 
     public int getScore() {
-        return score;
+        return this.score;
     }
 
     public void setScore(int score) {
@@ -57,19 +57,28 @@ public class Player {
         }
         head = list.getNode(1);
         int streak = 1;
+        score = 0;
         int position = 0;
         int temp1 = 1, temp2=1, temp3=1, temp4=1;
         int temp = 1;
+        boolean noStreak = true;
 
+        // Linked list array calculation
         for (int i=0;head != null; i++) {
 //            System.oureturn this.score;t.println("Suit = " + rank);
 
 //            System.out.println("Before streak value: " + streak);
 //            System.out.println("IS head.next null? " + head.next);    OK
+
+
+            // Link list array specific index data calculation
             if(head.next != null) {
-//                System.out.println("Rank sub: " + rank[i+1] + " -  " + rank[i] + " = "+ (rank[i + 1] - rank[i]));
+                System.out.println("Rank sub: " + rank[i+1] + " -  " + rank[i] + " = "+ (rank[i + 1] - rank[i]));
+
                 if ((rank[i + 1] - rank[i]) == 1) {
+                    noStreak = false;
 //                    score++;
+                    System.out.println("sub 1");
                     streak++;
                     score = streak;
 //                    System.out.println(score);
@@ -90,9 +99,9 @@ public class Player {
 //                    System.out.println(streak + " position = " + i);
 //                    System.out.println("from 1: " + score);
                 } else {
-                    if (streak > score) {
-                        position = i;
-                    }
+//                    if (streak > score) {
+//                        position = i;
+//                    }
                     streak = 1;
                     temp1=1;
                     temp2=1;
@@ -103,6 +112,11 @@ public class Player {
 
             head = head.next;
         }
+        System.out.println("Score value after loop: " + score);
+        if (noStreak == true) {
+            score = 1;
+            streak = 1;
+        }
         if (score < streak) {
             score = streak;
         }
@@ -110,14 +124,19 @@ public class Player {
 //        System.out.println("Streak: " + streak);
 //        System.out.println("Score: " + score);
 
+        System.out.println("Temp3 = " + temp3);
+        System.out.println("Temp4 = " + temp4);
+
         // If same color
-        if ((temp3==score && score != 1)) {
+        if ((temp3==score && (this.score != 1) )) {
             // If same SUIT
             if (temp4==score) {
-                score++;
+                this.score++;
             }
-            score++;
+            this.score++;
         }
+
+        System.out.println("Score value after checking color: " + score);
 
         head = list.getNode(1);
 //        int temp1 = 0, temp2=0, temp3=0;
@@ -145,9 +164,9 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", high_score=" + high_score +
+        return "Player {" +
+                "Name='" + name + '\'' +
+                ", Score=" + high_score +
                 '}';
     }
 }
