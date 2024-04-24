@@ -1,6 +1,12 @@
 public class Insertionsort {
+    // INSERTION sort to sort the data in any hand of cards
+    // Insertion sort is best when sorting a small amount of data and is better than selection sort
+    // Returns sorted cards according to their rank
     public Card[] insertionSort(Card[] cards) {
+        // length of array
         int n = cards.length;
+
+//      Initialize card and check to perform further opertation
         Card card = new Card();
 
         Card check = new Card();
